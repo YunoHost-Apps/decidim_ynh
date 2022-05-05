@@ -1,0 +1,1 @@
+*/5 * * * * __FINALPATH__/live/bin/delayed_job_cron.sh

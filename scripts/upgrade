@@ -164,6 +164,7 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	pushd "$final_path/live"
 		ynh_secure_remove --file="$final_path/live/Gemfile.lock"
+		bundle install
 		bundle update decidim
 		ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails decidim:upgrade
 		ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails db:migrate

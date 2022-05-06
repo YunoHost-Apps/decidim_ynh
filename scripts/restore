@@ -129,11 +129,6 @@ ynh_script_progression --message="Building app..."
 
 pushd "$final_path/live"
 	ynh_secure_remove --file="$final_path/live/Gemfile.lock"
-	bundle add figaro --skip-install
-	bundle add passenger --group production --skip-install
-	bundle add delayed_job_active_record --group production --skip-install
-	bundle add daemons --group production --skip-install
-	echo 'gem "whenever", require: false' >> "Gemfile"
 	bundle install
 	ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails assets:precompile
 popd

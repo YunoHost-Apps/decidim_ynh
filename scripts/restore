@@ -142,7 +142,7 @@ ynh_package_autoremove
 #=================================================
 ynh_script_progression --message="Restoring various files..."
 
-ynh_restore_file --origin_path="/etc/$app/"
+ynh_restore_file --origin_path="/etc/cron.d/$app"
 
 #=================================================
 # GENERIC FINALIZATION

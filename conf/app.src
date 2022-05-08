@@ -1,5 +1,5 @@
-SOURCE_URL=url of app's source
-SOURCE_SUM=sha256 checksum
+SOURCE_URL=https://github.com/decidim/decidim/archive/refs/tags/v0.26.1.tar.gz
+SOURCE_SUM=2a646685aa29a96b903bc82a21abe95745ff79d86f650aa5a28e2458de25b8d2
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true

@@ -169,6 +169,7 @@ then
 		ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails decidim:upgrade
 		ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails db:migrate
 		ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH yarn add rails-ujs
+		ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH yarn add graphql-ws
 		ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH yarn install
 		ynh_exec_warn_less ynh_exec_as $app env $ynh_node_load_PATH yarn cache clean
 		ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails assets:precompile

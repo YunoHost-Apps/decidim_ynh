@@ -104,7 +104,7 @@ ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
 ynh_install_nodejs --nodejs_version=$nodejs_version
 ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ stable main" --package="yarn" --key="https://dl.yarnpkg.com/debian/pubkey.gpg"
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
-ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger buster main" --package="libnginx-mod-http-passenger"
+ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $(lsb_release -cs) main" --package="libnginx-mod-http-passenger"
 ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
@@ -177,7 +177,7 @@ then
 fi
 
 ynh_install_app_dependencies $pkg_dependencies
-ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger buster main" --package="libnginx-mod-http-passenger"
+ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $(lsb_release -cs) main" --package="libnginx-mod-http-passenger"
 ynh_package_autoremove
 
 #=================================================

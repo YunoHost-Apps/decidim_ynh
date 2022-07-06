@@ -5,7 +5,7 @@ It shall NOT be edited by hand.
 
 # Decidim for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/decidim.svg)](https://dash.yunohost.org/appci/app/decidim) ![](https://ci-apps.yunohost.org/ci/badges/decidim.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/decidim.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/decidim.svg)](https://dash.yunohost.org/appci/app/decidim) ![Working status](https://ci-apps.yunohost.org/ci/badges/decidim.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/decidim.maintain.svg)  
 [![Install Decidim with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=decidim)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -24,25 +24,26 @@ Decidim is a participatory democracy framework, written in Ruby on Rails, origin
 
 ## Screenshots
 
-![](./doc/screenshots/screenshot1.PNG)
+![Screenshot of Decidim](./doc/screenshots/screenshot1.PNG)
 
 ## Documentation and resources
 
-* Official app website: https://decidim.org/
-* Official admin documentation: https://docs.decidim.org
-* Upstream app code repository: https://github.com/decidim/decidim
-* YunoHost documentation for this app: https://yunohost.org/app_decidim
-* Report a bug: https://github.com/YunoHost-Apps/decidim_ynh/issues
+* Official app website: <https://decidim.org/>
+* Official admin documentation: <https://docs.decidim.org>
+* Upstream app code repository: <https://github.com/decidim/decidim>
+* YunoHost documentation for this app: <https://yunohost.org/app_decidim>
+* Report a bug: <https://github.com/YunoHost-Apps/decidim_ynh/issues>
 
 ## Developer info
 
 Please send your pull request to the [testing branch](https://github.com/YunoHost-Apps/decidim_ynh/tree/testing).
 
 To try the testing branch, please proceed like that.
-```
+
+``` bash
 sudo yunohost app install https://github.com/YunoHost-Apps/decidim_ynh/tree/testing --debug
 or
 sudo yunohost app upgrade decidim -u https://github.com/YunoHost-Apps/decidim_ynh/tree/testing --debug
 ```
 
-**More info regarding app packaging:** https://yunohost.org/packaging_apps
+**More info regarding app packaging:** <https://yunohost.org/packaging_apps>

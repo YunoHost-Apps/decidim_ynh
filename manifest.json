@@ -5,7 +5,7 @@
     "description": {
         "en": "Participatory democracy framework,"
     },
-    "version": "0.26.1~ynh3",
+    "version": "0.26.2~ynh1",
     "url": "https://decidim.org/",
     "upstream": {
         "license": "AGPL-3.0-or-later",
@@ -44,7 +44,22 @@
                     "en": "Choose the application language",
                     "fr": "Choisissez la langue de l'application"
                 },
-                "choices": ["ca", "cs", "de", "en", "es", "eu", "fi", "fr", "it", "ja", "nl", "pl", "pt", "ro"],
+                "choices": [
+                    "ca",
+                    "cs",
+                    "de",
+                    "en",
+                    "es",
+                    "eu",
+                    "fi",
+                    "fr",
+                    "it",
+                    "ja",
+                    "nl",
+                    "pl",
+                    "pt",
+                    "ro"
+                ],
                 "default": "en"
             },
             {

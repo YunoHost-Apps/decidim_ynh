@@ -15,7 +15,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	ynh_clean_check_starting
+	true
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -39,7 +39,7 @@ admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters..."
+ynh_script_progression --message="Validating installation parameters..." --weight=1
 
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
@@ -50,7 +50,7 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..."
+ynh_script_progression --message="Storing installation settings..." --weight=1
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
@@ -63,7 +63,7 @@ ynh_app_setting_set --app=$app --key=secret_key_base --value=$secret_key_base
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..."
+ynh_script_progression --message="Installing dependencies..." --weight=1
 
 ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
 ynh_install_nodejs --nodejs_version=$nodejs_version
@@ -75,7 +75,7 @@ ynh_install_ruby --ruby_version=$ruby_version
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..."
+ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
 ynh_system_user_create --username=$app --home_dir="$final_path"
@@ -83,7 +83,7 @@ ynh_system_user_create --username=$app --home_dir="$final_path"
 #=================================================
 # CREATE A POSTGRESQL DATABASE
 #=================================================
-ynh_script_progression --message="Creating a PostgreSQL database..."
+ynh_script_progression --message="Creating a PostgreSQL database..." --weight=1
 
 ynh_psql_test_if_first_run
 db_name=$(ynh_sanitize_dbid --db_name=$app)
@@ -99,7 +99,7 @@ db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Setting up source files..."
+ynh_script_progression --message="Setting up source files..." --weight=1
 
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
@@ -112,7 +112,7 @@ chown -R $app:www-data "$final_path"
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..."
+ynh_script_progression --message="Configuring NGINX web server..." --weight=1
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
@@ -122,14 +122,14 @@ ynh_add_nginx_config
 #=================================================
 # INSTALL GEMS
 #=================================================
-ynh_script_progression --message="Installing gems..."
+ynh_script_progression --message="Installing gems..." --weight=1
 
 pushd $final_path
 	ynh_use_ruby
 	ynh_use_nodejs
 	ynh_exec_warn_less $ynh_gem install bundler --version $bundler_version
 	ynh_exec_warn_less $ynh_gem install rails --version $rails_version
-	ynh_exec_warn_less $ynh_gem install decidim -v $decidim_version
+	ynh_exec_warn_less $ynh_gem install decidim -v $(ynh_app_upstream_version)
 	ynh_exec_warn_less decidim live
 popd
 
@@ -140,7 +140,7 @@ chown -R $app:www-data "$final_path"
 #=================================================
 # CREATE DATA DIRECTORY
 #=================================================
-ynh_script_progression --message="Creating a data directory..."
+ynh_script_progression --message="Creating a data directory..." --weight=1
 
 datadir=/home/yunohost.app/$app
 ynh_app_setting_set --app=$app --key=datadir --value=$datadir
@@ -154,7 +154,7 @@ chown -R $app:www-data "$datadir"
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
 ynh_add_config --template="../conf/schedule.rb" --destination="$final_path/live/config/schedule.rb"
 chmod 400 "$final_path/live/config/schedule.rb"
@@ -180,7 +180,7 @@ chmod 644 "/etc/cron.d/$app"
 #=================================================
 # BUILD APP
 #=================================================
-ynh_script_progression --message="Building app..."
+ynh_script_progression --message="Building app..." --weight=1
 
 pushd "$final_path/live"
 	ynh_secure_remove --file="$final_path/live/Gemfile.lock"
@@ -212,7 +212,7 @@ ynh_package_autoremove
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring permissions..."
+ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
@@ -225,7 +225,7 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..."
+ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
 ynh_systemd_action --service_name=nginx --action=reload
 
@@ -233,4 +233,4 @@ ynh_systemd_action --service_name=nginx --action=reload
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed"
+ynh_script_progression --message="Installation of $app completed" --last

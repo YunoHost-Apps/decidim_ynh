@@ -118,8 +118,8 @@ then
 	pushd $final_path
 		ynh_use_ruby
 		ynh_use_nodejs
-		ynh_exec_warn_less $ynh_gem install bundler --version $bundler_version
-		ynh_exec_warn_less $ynh_gem install rails --version $rails_version
+		ynh_exec_warn_less $ynh_gem install bundler
+		#ynh_exec_warn_less $ynh_gem install rails --version $rails_version
 		ynh_exec_warn_less $ynh_gem install decidim -v $(ynh_app_upstream_version)
 	popd
 fi

@@ -4,10 +4,10 @@
 # COMMON VARIABLES
 #=================================================
 
-ruby_version=2.7.4
+ruby_version=3.0.2
 nodejs_version=16
 bundler_version=2.2.19
-rails_version=6.0.4
+rails_version=6.1
 
 # dependencies used by the app (must be on a single line)
 pkg_dependencies="postgresql imagemagick redis-server"

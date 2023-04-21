@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # Decidim pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/decidim.svg)](https://dash.yunohost.org/appci/app/decidim) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/decidim.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/decidim.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/decidim.svg)](https://dash.yunohost.org/appci/app/decidim) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/decidim.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/decidim.maintain.svg)
+
 [![Installer Decidim avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=decidim)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Decidim rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Decidim rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Decidim is a participatory democracy framework, written in Ruby on Rails, originally developed for the Barcelona City government online and offline participation website. Installing these libraries will provide you a generator and gems to help you develop web applications
 
@@ -22,15 +23,15 @@ Decidim is a participatory democracy framework, written in Ruby on Rails, origin
 
 **Démo :** https://decidim.org/demo/
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Decidim](./doc/screenshots/screenshot1.PNG)
+![Capture d’écran de Decidim](./doc/screenshots/screenshot1.PNG)
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://decidim.org/>
-* Documentation officielle de l'admin : <https://docs.decidim.org>
-* Dépôt de code officiel de l'app : <https://github.com/decidim/decidim>
+* Site officiel de l’app : <https://decidim.org/>
+* Documentation officielle de l’admin : <https://docs.decidim.org>
+* Dépôt de code officiel de l’app : <https://github.com/decidim/decidim>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_decidim>
 * Signaler un bug : <https://github.com/YunoHost-Apps/decidim_ynh/issues>
 
@@ -46,4 +47,4 @@ ou
 sudo yunohost app upgrade decidim -u https://github.com/YunoHost-Apps/decidim_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>

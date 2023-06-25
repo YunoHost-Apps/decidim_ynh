@@ -11,21 +11,6 @@ source ynh_install_ruby__2
 source /usr/share/yunohost/helpers
 
 #=================================================
-# STANDARD REMOVE
-#=================================================
-
-#=================================================
-# REMOVE DATA DIR
-#=================================================
-
-# Remove the data directory if --purge option is used
-if [ "${YNH_APP_PURGE:-0}" -eq 1 ]
-then
-	ynh_script_progression --message="Removing app data directory..." --weight=1
- 	ynh_secure_remove --file="$data_dir"
-fi
-
-#=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Removing NGINX web server configuration..." --weight=1
@@ -39,8 +24,8 @@ ynh_remove_nginx_config
 ynh_script_progression --message="Removing dependencies..." --weight=1
 
 # Remove metapackage and its dependencies
-ynh_remove_nodejs #REMOVEME ?
-ynh_remove_ruby #REMOVEME ?
+ynh_remove_nodejs
+ynh_remove_ruby
 
 #=================================================
 # SPECIFIC REMOVE
@@ -51,10 +36,6 @@ ynh_script_progression --message="Removing various files..." --weight=1
 
 # Remove a cron file
 ynh_secure_remove --file="/etc/cron.d/$app"
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
 
 #=================================================
 # END OF SCRIPT

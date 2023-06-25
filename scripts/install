@@ -10,16 +10,13 @@ source _common.sh
 source ynh_install_ruby__2
 source /usr/share/yunohost/helpers
 
-
-#REMOVEME ?
 secret_key_base=$(ynh_string_random --length=30)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-#REMOVEME ?
-ynh_app_setting_set --app=$app --key=language --value=$language
+
 ynh_app_setting_set --app=$app --key=secret_key_base --value=$secret_key_base
 
 #=================================================
@@ -28,9 +25,7 @@ ynh_app_setting_set --app=$app --key=secret_key_base --value=$secret_key_base
 # INSTALL DEPENDENCIES
 #=================================================
 
-#REMOVEME ?
 ynh_install_nodejs --nodejs_version=$nodejs_version
-#REMOVEME ?
 ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
@@ -80,17 +75,6 @@ popd
 chmod 750 "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R $app:www-data "$install_dir"
-
-#=================================================
-# CREATE DATA DIRECTORY
-#=================================================
-ynh_script_progression --message="Creating a data directory..." --weight=1
-
-mkdir -p $data_dir
-
-chmod 750 "$data_dir"
-chmod -R o-rwx "$data_dir"
-chown -R $app:www-data "$data_dir"
 
 #=================================================
 # ADD A CONFIGURATION

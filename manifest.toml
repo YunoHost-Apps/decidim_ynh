@@ -1,0 +1,67 @@
+packaging_format = 2
+
+id = "decidim"
+name = "Decidim"
+description.en = "Participatory democracy framework"
+
+version = "0.27.3~ynh2"
+
+maintainers = []
+
+[upstream]
+license = "AGPL-3.0-or-later"
+website = "https://decidim.org/"
+demo = "https://decidim.org/demo/"
+admindoc = "https://docs.decidim.org"
+code = "https://github.com/decidim/decidim"
+
+[integration]
+yunohost = ">= 11.1.21"
+architectures = "all"
+multi_instance = true
+ldap = false
+sso = false
+disk = "50M"
+ram.build = "50M"
+ram.runtime = "50M"
+
+[install]
+    [install.domain]
+    type = "domain"
+    full_domain = true
+
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
+
+    [install.language]
+    ask.en = "Choose the application language"
+    ask.fr = "Choisissez la langue de l'application"
+    type = "string"
+    choices = ["ca", "cs", "de", "en", "es", "eu", "fi", "fr", "it", "ja", "nl", "pl", "pt", "ro"]
+    default = "en"
+
+    [install.admin]
+    type = "user"
+
+    [install.password]
+    type = "password"
+
+[resources]
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.data_dir]
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.apt]
+    packages = "postgresql, imagemagick, libyaml-dev, libreadline6-dev, libncurses5-dev, libffi-dev, libgdbm-dev, libpq-dev, libicu-dev"
+    extras.yarn.repo = "deb https://dl.yarnpkg.com/debian/ stable main"
+    extras.yarn.key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    extras.yarn.packages = "yarn"
+
+    [resources.database]
+    type = "postgresql"

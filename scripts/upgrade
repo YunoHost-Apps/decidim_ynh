@@ -13,20 +13,20 @@ source /usr/share/yunohost/helpers
 #=================================================
 # LOAD SETTINGS
 #=================================================
-ynh_script_progression --message="Loading installation settings..." --weight=1
+#REMOVEME? ynh_script_progression --message="Loading installation settings..." --weight=1
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get --app=$app --key=domain)
-path_url=$(ynh_app_setting_get --app=$app --key=path)
-language=$(ynh_app_setting_get --app=$app --key=language)
-admin=$(ynh_app_setting_get --app=$app --key=admin)
-final_path=$(ynh_app_setting_get --app=$app --key=final_path)
-db_name=$(ynh_app_setting_get --app=$app --key=db_name)
-db_user=$db_name
-db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
-datadir=$(ynh_app_setting_get --app=$app --key=datadir)
-secret_key_base=$(ynh_app_setting_get --app=$app --key=secret_key_base)
+#REMOVEME? domain=$(ynh_app_setting_get --app=$app --key=domain)
+#REMOVEME? path=$(ynh_app_setting_get --app=$app --key=path)
+#REMOVEME? language=$(ynh_app_setting_get --app=$app --key=language)
+#REMOVEME? admin=$(ynh_app_setting_get --app=$app --key=admin)
+#REMOVEME? #REMOVEME? install_dir=$(ynh_app_setting_get --app=$app --key=install_dir)
+#REMOVEME? db_name=$(ynh_app_setting_get --app=$app --key=db_name)
+#REMOVEME? db_user=$db_name
+#REMOVEME? db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
+#REMOVEME? data_dir=$(ynh_app_setting_get --app=$app --key=data_dir)
+#REMOVEME? secret_key_base=$(ynh_app_setting_get --app=$app --key=secret_key_base)
 
 #=================================================
 # CHECK VERSION
@@ -38,16 +38,16 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
-ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=1
+#REMOVEME? ynh_script_progression --message="Backing up the app before upgrading (may take a while)..." --weight=1
 
 # Backup the current version of the app
-ynh_backup_before_upgrade
-ynh_clean_setup () {
+#REMOVEME? ynh_backup_before_upgrade
+#REMOVEME? ynh_clean_setup () {
 	# Restore it if the upgrade fails
-	ynh_restore_upgradebackup
+#REMOVEME? 	ynh_restore_upgradebackup
 }
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # STANDARD UPGRADE STEPS
@@ -57,8 +57,8 @@ ynh_abort_if_errors
 ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
 
 # Cleaning legacy permissions
-if ynh_legacy_permissions_exists; then
-	ynh_legacy_permissions_delete_all
+#REMOVEME? if ynh_legacy_permissions_exists; then
+#REMOVEME? 	ynh_legacy_permissions_delete_all
 
 	ynh_app_setting_delete --app=$app --key=is_public
 fi
@@ -66,10 +66,10 @@ fi
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
+#REMOVEME? ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
 
 # Create a dedicated user (if not existing)
-ynh_system_user_create --username=$app --home_dir="$final_path"
+#REMOVEME? ynh_system_user_create --username=$app --home_dir="$install_dir"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -82,20 +82,20 @@ then
 	# Download, check integrity, uncompress and patch the source from app.src
 fi
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=1
+#REMOVEME? ynh_script_progression --message="Upgrading dependencies..." --weight=1
 
-ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
+#REMOVEME? ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
 ynh_install_nodejs --nodejs_version=$nodejs_version
-ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ stable main" --package="yarn" --key="https://dl.yarnpkg.com/debian/pubkey.gpg"
+#REMOVEME? ynh_install_extra_app_dependencies --repo="deb https://dl.yarnpkg.com/debian/ stable main" --package="yarn" --key="https://dl.yarnpkg.com/debian/pubkey.gpg"
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
-ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $(lsb_release -cs) main" --package="libnginx-mod-http-passenger"
+#REMOVEME? ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $(lsb_release -cs) main" --package="libnginx-mod-http-passenger"
 ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
@@ -115,7 +115,7 @@ ynh_script_progression --message="Installing gems..." --weight=1
 
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-	pushd $final_path
+	pushd $install_dir
 		ynh_use_ruby
 		ynh_use_nodejs
 		ynh_exec_warn_less $ynh_gem install bundler
@@ -124,31 +124,31 @@ then
 	popd
 fi
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
 ynh_script_progression --message="Adding a configuration file..." --weight=1
 
-ynh_add_config --template="../conf/schedule.rb" --destination="$final_path/live/config/schedule.rb"
-chmod 400 "$final_path/live/config/schedule.rb"
-chown $app:$app "$final_path/live/config/schedule.rb"
+ynh_add_config --template="../conf/schedule.rb" --destination="$install_dir/live/config/schedule.rb"
+chmod 400 "$install_dir/live/config/schedule.rb"
+chown $app:$app "$install_dir/live/config/schedule.rb"
 
-ynh_add_config --template="../conf/application.yml" --destination="$final_path/live/config/application.yml"
-chmod 400 "$final_path/live/config/application.yml"
-chown $app:$app "$final_path/live/config/application.yml"
+ynh_add_config --template="../conf/application.yml" --destination="$install_dir/live/config/application.yml"
+chmod 400 "$install_dir/live/config/application.yml"
+chown $app:$app "$install_dir/live/config/application.yml"
 
-ynh_add_config --template="../conf/storage.yml" --destination="$final_path/live/config/storage.yml"
-chmod 400 "$final_path/live/config/storage.yml"
-chown $app:$app "$final_path/live/config/storage.yml"
+ynh_add_config --template="../conf/storage.yml" --destination="$install_dir/live/config/storage.yml"
+chmod 400 "$install_dir/live/config/storage.yml"
+chown $app:$app "$install_dir/live/config/storage.yml"
 
-ynh_add_config --template="../conf/delayed_job_cron.sh" --destination="$final_path/live/bin/delayed_job_cron.sh"
-chmod 400 "$final_path/live/bin/delayed_job_cron.sh"
-chown $app:$app "$final_path/live/bin/delayed_job_cron.sh"
-chmod +x "$final_path/live/bin/delayed_job_cron.sh"
+ynh_add_config --template="../conf/delayed_job_cron.sh" --destination="$install_dir/live/bin/delayed_job_cron.sh"
+chmod 400 "$install_dir/live/bin/delayed_job_cron.sh"
+chown $app:$app "$install_dir/live/bin/delayed_job_cron.sh"
+chmod +x "$install_dir/live/bin/delayed_job_cron.sh"
 
 ynh_add_config --template="../conf/cron" --destination="/etc/cron.d/$app"
 chown root: "/etc/cron.d/$app"
@@ -161,8 +161,8 @@ ynh_script_progression --message="Building app..." --weight=1
 
 if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
-	pushd "$final_path/live"
-		ynh_secure_remove --file="$final_path/live/Gemfile.lock"
+	pushd "$install_dir/live"
+#REMOVEME? 		ynh_secure_remove --file="$install_dir/live/Gemfile.lock"
 		bundle install
 		bundle update decidim
 		ynh_exec_warn_less ynh_exec_as $app env RAILS_ENV=production RACK_ENV=production $ynh_ruby_load_path bin/rails decidim:upgrade
@@ -175,8 +175,8 @@ then
 	popd
 fi
 
-ynh_install_app_dependencies $pkg_dependencies
-ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $(lsb_release -cs) main" --package="libnginx-mod-http-passenger"
+#REMOVEME? ynh_install_app_dependencies $pkg_dependencies
+#REMOVEME? ynh_install_extra_app_dependencies --repo="deb https://oss-binaries.phusionpassenger.com/apt/passenger $(lsb_release -cs) main" --package="libnginx-mod-http-passenger"
 ynh_package_autoremove
 
 #=================================================
@@ -184,9 +184,9 @@ ynh_package_autoremove
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
+#REMOVEME? ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
-ynh_systemd_action --service_name=nginx --action=reload
+#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT

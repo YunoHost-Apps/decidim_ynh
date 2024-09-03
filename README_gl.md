@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Decidim para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/decidim.svg)](https://dash.yunohost.org/appci/app/decidim) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/decidim.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/decidim.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/decidim.svg)](https://ci-apps.yunohost.org/ci/apps/decidim/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/decidim.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/decidim.maintain.svg)
 
 [![Instalar Decidim con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=decidim)
 
@@ -19,7 +19,7 @@ NON debe editarse manualmente.
 Decidim is a participatory democracy framework, written in Ruby on Rails, originally developed for the Barcelona City government online and offline participation website. Installing these libraries will provide you a generator and gems to help you develop web applications
 
 
-**Versión proporcionada:** 0.27.0~ynh1
+**Versión proporcionada:** 0.27.2~ynh1
 
 **Demo:** <https://decidim.org/demo/>
 

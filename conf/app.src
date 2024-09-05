@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/decidim/decidim/archive/refs/tags/v0.27.4.tar.gz
-SOURCE_SUM=595ee1286cc545bcbccd7bbeed41cd78bb345b1fb6c38d17901c23d2458f4653
+SOURCE_URL=https://github.com/decidim/decidim/archive/refs/tags/v0.28.2.tar.gz
+SOURCE_SUM=4e441b939f084b9a156c9aa5f096104ac9912dfbb7f58575e4b2fc06a88352e3
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true

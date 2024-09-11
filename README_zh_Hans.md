@@ -19,7 +19,7 @@
 Decidim is a participatory democracy framework, written in Ruby on Rails, originally developed for the Barcelona City government online and offline participation website. Installing these libraries will provide you a generator and gems to help you develop web applications
 
 
-**分发版本：** 0.27.4~ynh1
+**分发版本：** 0.29.0~ynh1
 
 **演示：** <https://decidim.org/demo/>
 
